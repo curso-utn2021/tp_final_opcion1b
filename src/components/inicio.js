@@ -10,16 +10,13 @@ export default function Inicio() {
       <div className="links">
         <div>Links de la sección inicio</div>
         <div>
-          {" "}
-          <Link to="/libros">Ir al Estante de libros</Link>{" "}
+          <Link to="/libros">Ir al Estante de libros</Link>
         </div>
         <div>
-          {" "}
-          <Link to="/personas">Ir al ABM de personas (prestatarios)</Link>{" "}
+          <Link to="/personas">Ir al ABM de personas (prestatarios)</Link>
         </div>
         <div>
-          {" "}
-          <Link to="/categorias">Ir al ABM de categorias</Link>{" "}
+          <Link to="/categorias">Ir al ABM de categorias</Link>
         </div>
       </div>
     </div>

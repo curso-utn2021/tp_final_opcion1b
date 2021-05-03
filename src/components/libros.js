@@ -2,8 +2,11 @@ import LibroCard from "./libroCard";
 import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
+import ModalAltaLibro from "./modalesAuxiliares/modalAltaLibro";
 
 export default function Libros(props) {
+  const [mostrarModalAltaLibro, setMostrarModalAltaLibro] = React.useState(false);
+
   const cargaDatosDeServer = async () => {
     console.log("ejecutando cargaDatosDeServer");
 
@@ -40,6 +43,14 @@ export default function Libros(props) {
 
   React.useEffect(() => cargaDatosDeServer(), []);
 
+  const ocultarModalAltaLibro = () => {
+    setMostrarModalAltaLibro(false);
+  };
+
+  const onAlta = () => {
+    setMostrarModalAltaLibro(true);
+  };
+
   return (
     <div className="seccion">
       <div className="titulo">
@@ -48,7 +59,7 @@ export default function Libros(props) {
 
       <div className="coleccionCards"> {libros} </div>
       <div className="botonesDeSeccion">
-        <button> Alta</button>
+        <button onClick={onAlta}> Alta</button>
       </div>
 
       <div className="links">
@@ -64,6 +75,9 @@ export default function Libros(props) {
             <Link to="/categorias">Ir a categorias</Link>
           </div>
         </div>
+        {mostrarModalAltaLibro && (
+          <ModalAltaLibro ocultame={() => ocultarModalAltaLibro()} refrescame={() => cargaDatosDeServer()} />
+        )}
       </div>
     </div>
   );

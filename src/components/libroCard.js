@@ -1,16 +1,16 @@
 import axios from "axios";
 import React from "react";
+import ModalPrestarLibro from "./modalesAuxiliares/modalPrestarLibro";
+import ModalEditarLibro from "./modalesAuxiliares/modalEditarLibro";
 
 export default function LibroCard(props) {
   function sacarWarningDeVariableNoUsada(variable) {}
 
-  const onPrestar = async () => {
-    try {
-    } catch (error) {
-      alert(error.message);
-    }
+  const [mostrarModalPrestarLibro, setMostrarModalPrestarLibro] = React.useState(false);
+  const [mostrarModalEditarLibro, setMostrarModalEditarLibro] = React.useState(false);
 
-    setMostrarModalPrestar(true);
+  const onPrestarPaso1obtenerIdPersona = async () => {
+    setMostrarModalPrestarLibro(true);
   };
 
   const onDevolver = async () => {
@@ -24,51 +24,28 @@ export default function LibroCard(props) {
   };
 
   const onEditar = async () => {
-    try {
-      var respuesta = await axios.put("http://localhost:3001/libro/devolver/" + props.id);
-      props.history.push("/libros");
-      sacarWarningDeVariableNoUsada(respuesta);
-    } catch (error) {
-      alert(error.message);
-    }
+    setMostrarModalEditarLibro(true);
   };
 
   const onBorrar = async () => {
     try {
-      var respuesta = await axios.put("http://localhost:3001/libro/devolver/" + props.id);
-      props.history.push("/libros");
+      var respuesta = await axios.delete("http://localhost:3001/libro/" + props.id);
+      props.refrescame();
       sacarWarningDeVariableNoUsada(respuesta);
     } catch (error) {
       alert(error.message);
     }
   };
 
-  async function traerPersonasDeServer() {
-    try {
-      let respuesta = await axios.get("http://localhost:3001/persona");
-      console.log("respuesta dentro de funcion ", respuesta.data);
+  let ocultarModalPrestarLibro = () => {
+    setMostrarModalPrestarLibro(false);
+  };
 
-      return respuesta.data;
-    } catch (error) {
-      alert(error.message);
-    }
-  }
-  let listaPersonas = traerPersonasDeServer();
+  let ocultarModalEditarLibro = () => {
+    setMostrarModalEditarLibro(false);
+    props.refrescame();
+  };
 
-  console.log("respuesta fuera de funcion", listaPersonas);
-
-  const [mostrarModalPrestar, setMostrarModalPrestar] = React.useState(false);
-  let selector = <select name="select"></select>;
-
-  /* 
-    var opciones = [
-    <option key="10" value="dummy value">
-      dummy description
-    </option>,
-  ];
-
-  selector = <select name="select">{opciones}</select>;
-*/
   return (
     <div className="libroCard">
       <div> {props.nombre}</div>
@@ -79,7 +56,7 @@ export default function LibroCard(props) {
       <div> Prestado a {props.persona_id}</div>
 
       <div className="botoneraInCard">
-        <button className="botonTransparentado" onClick={onPrestar}>
+        <button className="botonTransparentado" onClick={onPrestarPaso1obtenerIdPersona}>
           Prestar
         </button>
         <button className="botonTransparentado" onClick={onDevolver}>
@@ -93,17 +70,8 @@ export default function LibroCard(props) {
         </button>
       </div>
 
-      {mostrarModalPrestar && (
-        <div className="modal">
-          {" "}
-          <h2>modal</h2>
-          <div>{selector}</div>
-          <div>
-            <button onClick={() => setMostrarModalPrestar(false)}>Cerrar</button>{" "}
-            <button onClick={() => setMostrarModalPrestar(false)}>Prestar</button>{" "}
-          </div>
-        </div>
-      )}
+      {mostrarModalPrestarLibro && <ModalPrestarLibro ocultame={() => ocultarModalPrestarLibro()} idLibro={props.id} />}
+      {mostrarModalEditarLibro && <ModalEditarLibro ocultame={() => ocultarModalEditarLibro()} idLibro={props.id} />}
     </div>
   );
 }
