@@ -8,6 +8,8 @@ export default function Categorias() {
   let categorias = [];
   const [listaCategorias, setlistaCategorias] = React.useState([{ nombre: "categoria1" }, { nombre: "categoria2" }]);
   const [mostrarModalAltaCategoria, setMostrarModalAltaCategoria] = React.useState(false);
+  const [mostrarLibros, setMostrarLibros] = React.useState(null);
+  const [listaLibros, setListaLibros] = React.useState([]);
 
   const cargaDatosDeServer = async () => {
     var respuesta = await axios.get("http://localhost:3001/categoria");
@@ -17,6 +19,11 @@ export default function Categorias() {
 
   React.useEffect(() => cargaDatosDeServer(), []);
 
+  const categoriaLibros = (id) => {
+    console.log(id);
+    setMostrarLibros(id);
+  }
+
   listaCategorias.forEach((element, index) => {
     categorias.push(
       <CategoriaCard
@@ -24,6 +31,7 @@ export default function Categorias() {
         key={index}
         categoriaId={element.id}
         refrescame={() => cargaDatosDeServer()}
+        onLibros={categoriaLibros}
       />
     );
   });
@@ -36,6 +44,56 @@ export default function Categorias() {
     setMostrarModalAltaCategoria(true);
   };
 
+  const cargarLibros = async () => {
+    if(mostrarLibros != null){
+      try {
+        const respuesta = await axios.get("http://localhost:3001/libro");
+        console.log(respuesta.data);
+        setListaLibros(respuesta.data);
+      } catch(e) {
+        console.log(e.message);
+        console.log("No se encontraron libros para esta categoria.");
+        setListaLibros([]);
+      }
+    }
+  }
+
+  React.useEffect(() => cargarLibros(), [mostrarLibros]);
+
+  let ListadoLibros = () => (
+    <div> 
+    <h3>{(listaCategorias.find((elem) => elem.id == mostrarLibros)).nombre}</h3>
+    <div>
+    { listaLibros.filter((e)=> e.categoria_id == mostrarLibros).length > 0 ?
+      <>
+      <table className="tablaLibros">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Descripcion</th>
+          </tr>
+      </thead>
+      <tbody>
+      
+          {listaLibros.map((elem)=> ( elem.categoria_id == mostrarLibros ?
+            <tr>
+              <td>{elem.id}</td>
+              <td>{elem.nombre}</td>
+              <td>{elem.descripcion}</td>
+            </tr>
+            : null
+          ))}
+          
+
+      </tbody>
+      </table>
+      </>
+      : <p>No hay libros con esta categoría</p>
+    }
+      </div>
+    </div>)
+
   return (
     <div className="seccion">
       <div className="titulo">
@@ -44,6 +102,9 @@ export default function Categorias() {
       <div className="coleccionCards"> {categorias} </div>
       <div className="botonesDeSeccion">
         <button onClick={onAlta}> Alta</button>
+      </div>
+      <div className="botonesDeSeccion">
+        { mostrarLibros ? <ListadoLibros /> : null }
       </div>
       <div className="links">
         Links de la sección Categorías:

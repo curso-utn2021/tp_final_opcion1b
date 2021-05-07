@@ -173,6 +173,28 @@
   padding-top: 1em;
 }
 
+.tablaLibros {
+  display: table;
+  align-content: center;
+  border: 3px solid rebeccapurple;
+  border-radius: 50%;
+  border-collapse: collapse;
+  margin: 5px;
+}
+
+.tablaLibros td,th {
+  align-items: left;
+  border: 1px solid rebeccapurple;
+  border-radius: 50%;
+  border-collapse: collapse;
+  margin: 2px;
+  padding: 5px;
+}
+
+.tablaLibros td {
+  text-align: justify;
+}
+
 .App {
   text-align: center;
 }

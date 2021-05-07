@@ -35,6 +35,9 @@ export default function PersonaCard(props) {
         <button className="botonTransparentado" onClick={onBorrar}>
           Borrar
         </button>
+        <button className="botonTransparentado" onClick={()=>props.onLibros(props.personaId)}>
+          Libros
+        </button>
       </div>
 
       {mostrarModalEditarPersona && (
