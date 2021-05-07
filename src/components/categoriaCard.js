@@ -32,6 +32,7 @@ export default function CategoriaCard(props) {
         <button className="botonTransparentado" onClick={onBorrar}>
           Borrar
         </button>
+        <button className="botonTransparentado" onClick={()=>props.onLibros(props.categoriaId)}>Libros</button>
       </div>
       {mostrarModalEditarCategoria && <ModalEditarCategoria ocultame={() => ocultarModalEditarCategoria()} />}
     </div>

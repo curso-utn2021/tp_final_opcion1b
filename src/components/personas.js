@@ -8,6 +8,8 @@ export default function Personas() {
   let personas = [];
   const [mostrarModalAltaPersona, setMostrarModalAltaPersona] = React.useState(false);
   const [listaPersonas, setlistaPersonas] = React.useState([{ nombre: "persona1" }, { nombre: "persona2" }]);
+  const [mostrarLibros, setMostrarLibros] = React.useState(null);
+  const [listaLibros, setListaLibros] = React.useState([]);
 
   const cargaDatosDeServer = async () => {
     var respuesta = await axios.get("http://localhost:3001/persona");
@@ -17,9 +19,14 @@ export default function Personas() {
 
   React.useEffect(() => cargaDatosDeServer(), []);
 
+  const prestadosLibros = (id) => {
+    console.log(id);
+    setMostrarLibros(id);
+  }
+
   listaPersonas.forEach((element, index) => {
     personas.push(
-      <PersonaCard refrescame={() => cargaDatosDeServer()} nombre={element.nombre} personaId={element.id} key={index} />
+      <PersonaCard refrescame={() => cargaDatosDeServer()} nombre={element.nombre} personaId={element.id} key={index} onLibros={prestadosLibros}/>
     );
   });
 
@@ -31,6 +38,56 @@ export default function Personas() {
     setMostrarModalAltaPersona(false);
   };
 
+  const cargarLibros = async () => {
+    if(mostrarLibros != null){
+      try {
+        const respuesta = await axios.get("http://localhost:3001/libro");
+        console.log(respuesta.data);
+        setListaLibros(respuesta.data);
+      } catch(e) {
+        console.log(e.message);
+        console.log("No se encontraron libros para esta categoria.");
+        setListaLibros([]);
+      }
+    }
+  }
+
+  React.useEffect(() => cargarLibros(), [mostrarLibros]);
+
+  let ListadoLibros = () => (
+    <div> 
+    <h3>{(listaPersonas.find((elem) => elem.id == mostrarLibros)).nombre}</h3>
+    <div>
+    { listaLibros.filter((e)=> e.persona_id == mostrarLibros).length > 0 ?
+      <>
+      <table className="tablaLibros">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Descripcion</th>
+          </tr>
+      </thead>
+      <tbody>
+      
+          {listaLibros.map((elem)=> ( elem.persona_id == mostrarLibros ?
+            <tr>
+              <td>{elem.id}</td>
+              <td>{elem.nombre}</td>
+              <td>{elem.descripcion}</td>
+            </tr>
+            : null
+          ))}
+          
+
+      </tbody>
+      </table>
+      </>
+      : <p>No tiene libros prestados de la biblioteca.</p>
+    }
+      </div>
+    </div>)
+
   return (
     <div className="seccion">
       <div className="titulo">
@@ -39,6 +96,9 @@ export default function Personas() {
       <div className="coleccionCards"> {personas} </div>
       <div className="botonesDeSeccion">
         <button onClick={onAlta}> Alta</button>
+      </div>
+      <div className="botonesDeSeccion">
+        { mostrarLibros ? <ListadoLibros /> : null }
       </div>
       <div className="links">
         Links de la sección personas (prestatarios):
