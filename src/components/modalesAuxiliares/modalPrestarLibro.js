@@ -26,7 +26,7 @@ export default function ModalPrestarLibro(props) {
   listaPersonas.forEach((element, index) => {
     opciones.push(
       <option key={index} value={element.id}>
-        {element.nombre}
+        {element.nombre+' '+element.apellido}
       </option>
     );
   });
