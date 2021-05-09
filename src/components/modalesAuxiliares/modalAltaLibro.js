@@ -99,9 +99,10 @@ export default function ModalAltaLibro(props) {
         persona_id: idPersonaSeleccionado,
       });
       sacarWarningDeVariableNoUsada(respuesta);
-
+      props.ocultame();
       props.refrescame();
     } catch (error) {
+      console.log(error);
       alert(error);
     }
   };

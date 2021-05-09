@@ -20,7 +20,7 @@ export default function ModalAltaPersona(props) {
         email: email,
       });
       sacarWarningDeVariableNoUsada(respuesta);
-
+      props.ocultame();
       props.refrescame();
     } catch (error) {
       alert(error);

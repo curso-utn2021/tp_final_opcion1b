@@ -14,9 +14,10 @@ export default function ModalAltaCategoria(props) {
         nombre: nombre,
       });
       sacarWarningDeVariableNoUsada(respuesta);
-
+      props.ocultame();
       props.refrescame();
     } catch (error) {
+      
       alert(error);
     }
   };

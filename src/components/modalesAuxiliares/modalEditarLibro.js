@@ -12,7 +12,9 @@ export default function ModalEditarLibro(props) {
         descripcion: descripcion,
       });
       sacarWarningDeVariableNoUsada(respuesta);
+      props.ocultame();
     } catch (error) {
+      console.log(error);
       alert(error);
     }
   };

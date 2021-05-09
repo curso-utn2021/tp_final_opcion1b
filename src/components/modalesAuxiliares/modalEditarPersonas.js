@@ -20,6 +20,7 @@ export default function ModalEditarPersona(props) {
         apellido: apellido,
         alias: alias,
       });
+      props.ocultame();
       props.refrescame();
       sacarWarningDeVariableNoUsada(respuesta);
     } catch (error) {

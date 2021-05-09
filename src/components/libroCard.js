@@ -9,8 +9,9 @@ export default function LibroCard(props) {
   const [mostrarModalPrestarLibro, setMostrarModalPrestarLibro] = React.useState(false);
   const [mostrarModalEditarLibro, setMostrarModalEditarLibro] = React.useState(false);
 
-  const onPrestarPaso1obtenerIdPersona = async () => {
+  const onPrestar = async () => {
     setMostrarModalPrestarLibro(true);
+    
   };
 
   const onDevolver = async () => {
@@ -39,6 +40,7 @@ export default function LibroCard(props) {
 
   let ocultarModalPrestarLibro = () => {
     setMostrarModalPrestarLibro(false);
+    props.refrescame();
   };
 
   let ocultarModalEditarLibro = () => {
@@ -52,11 +54,11 @@ export default function LibroCard(props) {
       <div> Id libro {props.id}</div>
 
       <div> {props.descripcion}</div>
-      <div> Id Cat{props.categoria_id}</div>
-      <div> Prestado a {props.persona_id}</div>
+      <div> {props.categoria_id}</div>
+      <div>{props.persona_id}</div>
 
       <div className="botoneraInCard">
-        <button className="botonTransparentado" onClick={onPrestarPaso1obtenerIdPersona}>
+        <button className="botonTransparentado" onClick={onPrestar}>
           Prestar
         </button>
         <button className="botonTransparentado" onClick={onDevolver}>

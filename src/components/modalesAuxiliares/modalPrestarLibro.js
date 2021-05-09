@@ -51,6 +51,8 @@ export default function ModalPrestarLibro(props) {
         persona_id: idPersonaSeleccionado,
       });
       sacarWarningDeVariableNoUsada(respuesta);
+      props.ocultame();
+      
     } catch (error) {
       alert(error);
     }
