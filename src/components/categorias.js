@@ -24,7 +24,7 @@ export default function Categorias() {
   React.useEffect(() => cargaDatosDeServer(), []);
 
   const categoriaLibros = (id) => {
-    console.log(id);
+    
     setMostrarLibros(id);
   }
 
@@ -49,10 +49,10 @@ export default function Categorias() {
   };
 
   const cargarLibros = async () => {
-    if(mostrarLibros != null){
+    if(mostrarLibros){
       try {
         const respuesta = await axios.get("http://localhost:3001/libro");
-        console.log(respuesta.data);
+        
         setListaLibros(respuesta.data);
       } catch(e) {
         console.log(e.message);
@@ -81,7 +81,7 @@ export default function Categorias() {
       <tbody>
       
           {listaLibros.map((elem)=> ( elem.categoria_id == mostrarLibros ?
-            <tr>
+            <tr key={elem.id}>
               <td>{elem.id}</td>
               <td>{elem.nombre}</td>
               <td>{elem.descripcion}</td>

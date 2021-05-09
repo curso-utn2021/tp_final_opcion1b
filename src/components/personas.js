@@ -20,7 +20,6 @@ export default function Personas() {
   React.useEffect(() => cargaDatosDeServer(), []);
 
   const prestadosLibros = (id) => {
-    console.log(id);
     setMostrarLibros(id);
   }
 
@@ -42,7 +41,7 @@ export default function Personas() {
     if(mostrarLibros != null){
       try {
         const respuesta = await axios.get("http://localhost:3001/libro");
-        console.log(respuesta.data);
+        
         setListaLibros(respuesta.data);
       } catch(e) {
         console.log(e.message);
@@ -71,7 +70,7 @@ export default function Personas() {
       <tbody>
       
           {listaLibros.map((elem)=> ( elem.persona_id == mostrarLibros ?
-            <tr>
+            <tr key={elem.id}>
               <td>{elem.id}</td>
               <td>{elem.nombre}</td>
               <td>{elem.descripcion}</td>
