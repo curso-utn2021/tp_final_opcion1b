@@ -62,7 +62,7 @@ export default function Categorias() {
     }
   }
 
-  React.useEffect(() => cargarLibros, [mostrarLibros]);
+  React.useEffect(() => cargarLibros(), [mostrarLibros]);
 
   let ListadoLibros = () => (
     <div> 
