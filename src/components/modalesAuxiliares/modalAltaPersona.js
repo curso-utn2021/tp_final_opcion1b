@@ -23,7 +23,7 @@ export default function ModalAltaPersona(props) {
       props.ocultame();
       props.refrescame();
     } catch (error) {
-      alert(error);
+      alert(error.response.data.Error);
     }
   };
 

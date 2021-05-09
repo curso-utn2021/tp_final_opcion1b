@@ -9,12 +9,13 @@ export default function ModalEditarPersona(props) {
    */
 
   // Variables de inputs controlados
-  const [nombre, setNombre] = React.useState("");
-  const [apellido, setApellido] = React.useState("");
-  const [alias, setAlias] = React.useState("");
+  const [nombre, setNombre] = React.useState(props.nombre);
+  const [apellido, setApellido] = React.useState(props.apellido);
+  const [alias, setAlias] = React.useState(props.alias);
 
   const onEditar = async () => {
     try {
+      
       var respuesta = await axios.put("http://localhost:3001/persona/" + props.idPersona, {
         nombre: nombre,
         apellido: apellido,
@@ -24,7 +25,7 @@ export default function ModalEditarPersona(props) {
       props.refrescame();
       sacarWarningDeVariableNoUsada(respuesta);
     } catch (error) {
-      alert(error);
+      alert(error.response.data.Error);
     }
   };
 
@@ -42,8 +43,9 @@ export default function ModalEditarPersona(props) {
         <div>
           Nombre:
           <input
-            type="text"
+            type="text" value={nombre}
             onChange={(event) => {
+              console.log(event.target.value);
               setNombre(event.target.value);
             }}
           />
@@ -52,7 +54,7 @@ export default function ModalEditarPersona(props) {
         <div>
           Apellido:
           <input
-            type="text"
+            type="text" value={apellido}
             onChange={(event) => {
               setApellido(event.target.value);
             }}
@@ -62,7 +64,7 @@ export default function ModalEditarPersona(props) {
         <div>
           Alias:
           <input
-            type="text"
+            type="text" value={alias}
             onChange={(event) => {
               setAlias(event.target.value);
             }}

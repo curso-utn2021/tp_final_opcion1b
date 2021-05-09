@@ -23,7 +23,7 @@ export default function ModalAltaLibro(props) {
 
       setListaPersonas(respuestaPersonas.data);
     } catch (error) {
-      alert(error);
+      alert(error.response.data.Error);
     }
   };
 
@@ -33,7 +33,7 @@ export default function ModalAltaLibro(props) {
 
       setListaCategorias(respuestaCategorias.data);
     } catch (error) {
-      alert(error);
+      alert(error.response.data.Error);
     }
   };
 
@@ -102,7 +102,7 @@ export default function ModalAltaLibro(props) {
       props.ocultame();
       props.refrescame();
     } catch (error) {
-      console.log(error);
+      console.log(error.data);
       alert(error);
     }
   };

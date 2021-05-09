@@ -15,7 +15,7 @@ export default function ModalPrestarLibro(props) {
 
       setListaPersonas(respuesta.data);
     } catch (error) {
-      alert(error);
+      alert(error.response.data.Error);
     }
   };
 
@@ -54,7 +54,7 @@ export default function ModalPrestarLibro(props) {
       props.ocultame();
       
     } catch (error) {
-      alert(error);
+      alert(error.response.data.Error);
     }
   };
 

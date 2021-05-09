@@ -12,8 +12,12 @@ export default function Categorias() {
   const [listaLibros, setListaLibros] = React.useState([]);
 
   const cargaDatosDeServer = async () => {
+    try {
     var respuesta = await axios.get("http://localhost:3001/categoria");
-
+    }
+    catch(error){
+      alert(error.response.data.Error);
+    }
     setlistaCategorias(respuesta.data);
   };
 

@@ -13,7 +13,7 @@ export default function CategoriaCard(props) {
       props.refrescame();
       sacarWarningDeVariableNoUsada(respuesta);
     } catch (error) {
-      alert(error.message);
+      alert(error.response.data.Error);
     }
   };
 
@@ -26,7 +26,7 @@ export default function CategoriaCard(props) {
       <div> {props.nombre} </div>
 
       <div className="botoneraInCard">
-        <button className="botonTransparentado" onClick={() => setMostrarModalEditarCategoria(true)}>
+        <button className="botonTransparentado" onClick={() => alert('No se puede editar la categoria')}>
           Editar
         </button>
         <button className="botonTransparentado" onClick={onBorrar}>

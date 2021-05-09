@@ -22,7 +22,7 @@ export default function Libros(props) {
 
     } catch (error) {
       console.log(error);
-      alert(error);
+      alert(error.response.data.Error);
     } // Fin de trycatch
   }; //Fin de función cargaDatosDeServer
 
@@ -35,18 +35,18 @@ export default function Libros(props) {
     const id=persona.find((personaB) => {
       if (listadoB.persona_id===personaB.id)
       {
-        return {id:listadoB.id,nombre:listadoB.nombre,descripcion:listadoB.descripcion,categoria_id:listadoB.categoria_id,persona_id:'Prestado a '+personaB.nombre}
+        return {id:listadoB.id,nombre:listadoB.nombre,descripcion:listadoB.descripcion,categoria_id:listadoB.categoria_id,persona_id:'Prestado a '+personaB.nombre+' '+personaB.apellido}
       }
     }
     )
-      return {id:listadoB.id,nombre:listadoB.nombre,descripcion:listadoB.descripcion,categoria_id:listadoB.categoria_id,persona_id:id ? 'Prestado a '+id.nombre : 'No se encuentra prestado'}
+      return {id:listadoB.id,nombre:listadoB.nombre,descripcion:listadoB.descripcion,categoria_id:listadoB.categoria_id,persona_id:id ? 'Prestado a '+id.nombre+' '+id.apellido : 'No se encuentra prestado'}
   })
  
   const datosCompletos = datos.map((datosB)=>{
     const id=categoria.find((categoriaB) => {
       if (categoriaB.id===datosB.categoria_id)
       {
-        return {id:datosB.id,nombre:datosB.nombre,descripcion:datosB.descripcion,categoria_id:categoriaB.nombre,persona_id:'Prestado a '+datosB.persona_id}
+        return {id:datosB.id,nombre:datosB.nombre,descripcion:datosB.descripcion,categoria_id:categoriaB.nombre,persona_id:datosB.persona_id}
       }
     }
     )

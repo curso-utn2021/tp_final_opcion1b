@@ -17,8 +17,7 @@ export default function ModalAltaCategoria(props) {
       props.ocultame();
       props.refrescame();
     } catch (error) {
-      
-      alert(error);
+        alert(error.response.data.Error);
     }
   };
 

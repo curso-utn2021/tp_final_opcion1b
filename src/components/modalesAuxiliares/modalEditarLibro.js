@@ -4,7 +4,7 @@ import React from "react";
 export default function ModalEditarLibro(props) {
   function sacarWarningDeVariableNoUsada(variable) {}
 
-  const [descripcion, setDescripcion] = React.useState("");
+  const [descripcion, setDescripcion] = React.useState(props.descripcion);
 
   const onEditar = async () => {
     try {
@@ -15,10 +15,10 @@ export default function ModalEditarLibro(props) {
       props.ocultame();
     } catch (error) {
       console.log(error);
-      alert(error);
+      alert(error.response.data.Error);
     }
   };
-
+  
   return (
     <div className="modal">
       <div className="modalInterno">
@@ -26,7 +26,7 @@ export default function ModalEditarLibro(props) {
         <div>
           <h2>Sólo se puede editar la descripción</h2>
           <input
-            type="text"
+            type="text" value={descripcion}
             onChange={(event) => {
               //alert(event.target.value);
               setDescripcion(event.target.value);

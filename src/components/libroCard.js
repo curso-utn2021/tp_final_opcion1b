@@ -20,7 +20,7 @@ export default function LibroCard(props) {
       sacarWarningDeVariableNoUsada(respuesta);
       props.refrescame();
     } catch (error) {
-      alert(error.message);
+      alert(error.response.data.Error);
     }
   };
 
@@ -34,7 +34,7 @@ export default function LibroCard(props) {
       props.refrescame();
       sacarWarningDeVariableNoUsada(respuesta);
     } catch (error) {
-      alert(error.message);
+      alert(error.response.data.Error);
     }
   };
 
@@ -64,7 +64,7 @@ export default function LibroCard(props) {
         <button className="botonTransparentado" onClick={onDevolver}>
           Devolver
         </button>
-        <button className="botonTransparentado" onClick={onEditar}>
+        <button className="botonTransparentado"  onClick={onEditar}>
           Editar
         </button>
         <button className="botonTransparentado" onClick={onBorrar}>
@@ -73,7 +73,7 @@ export default function LibroCard(props) {
       </div>
 
       {mostrarModalPrestarLibro && <ModalPrestarLibro ocultame={() => ocultarModalPrestarLibro()} idLibro={props.id} />}
-      {mostrarModalEditarLibro && <ModalEditarLibro ocultame={() => ocultarModalEditarLibro()} idLibro={props.id} />}
+      {mostrarModalEditarLibro && <ModalEditarLibro ocultame={() => ocultarModalEditarLibro()} idLibro={props.id} descripcion={props.descripcion} />}
     </div>
   );
 }

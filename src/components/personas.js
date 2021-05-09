@@ -26,7 +26,7 @@ export default function Personas() {
 
   listaPersonas.forEach((element, index) => {
     personas.push(
-      <PersonaCard refrescame={() => cargaDatosDeServer()} nombre={element.nombre} personaId={element.id} key={index} onLibros={prestadosLibros}/>
+      <PersonaCard refrescame={() => cargaDatosDeServer()} nombre={element.nombre} apellido={element.apellido} personaId={element.id} email={element.email} alias={element.alias} key={index} onLibros={prestadosLibros}/>
     );
   });
 

@@ -20,14 +20,16 @@ export default function PersonaCard(props) {
       props.refrescame();
       sacarWarningDeVariableNoUsada(respuesta);
     } catch (error) {
-      alert(error.message);
+      alert(error.response.data.Error);
     }
   };
 
   return (
     <div className="personaCard">
-      <div> {props.nombre} </div>
+      <div> {props.nombre} {props.apellido}</div>
       <div> {props.personaId} </div>
+      <div> {props.email} </div>
+      <div> {props.alias} </div>
       <div className="botoneraInCard">
         <button className="botonTransparentado" onClick={onEditar}>
           Editar
@@ -44,6 +46,9 @@ export default function PersonaCard(props) {
         <ModalEditarPersona
           refrescame={props.refrescame}
           idPersona={props.personaId}
+          nombre={props.nombre}
+          apellido={props.apellido}
+          alias={props.alias}
           ocultame={ocultarModalEditarPersona}
         />
       )}
