@@ -103,7 +103,7 @@ export default function ModalAltaLibro(props) {
       props.refrescame();
     } catch (error) {
       console.log(error.data);
-      alert(error);
+      alert(error.response.data.Error);
     }
   };
 
