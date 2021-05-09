@@ -46,7 +46,7 @@ export default function ModalAltaLibro(props) {
   listaPersonas.forEach((element, index) => {
     opcionesPersona.push(
       <option key={index} value={element.id}>
-        {element.nombre}
+        {element.nombre+' '+element.apellido}
       </option>
     );
   });
