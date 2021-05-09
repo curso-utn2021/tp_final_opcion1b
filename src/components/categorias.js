@@ -66,9 +66,9 @@ export default function Categorias() {
 
   let ListadoLibros = () => (
     <div> 
-    <h3>{(listaCategorias.find((elem) => elem.id == mostrarLibros)).nombre}</h3>
+    <h3>{(listaCategorias.find((elem) => elem.id === mostrarLibros)).nombre}</h3>
     <div>
-    { listaLibros.filter((e)=> e.categoria_id == mostrarLibros).length > 0 ?
+    { listaLibros.filter((e)=> e.categoria_id === mostrarLibros).length > 0 ?
       <>
       <table className="tablaLibros">
       <thead>
@@ -80,7 +80,7 @@ export default function Categorias() {
       </thead>
       <tbody>
       
-          {listaLibros.map((elem)=> ( elem.categoria_id == mostrarLibros ?
+          {listaLibros.map((elem)=> ( elem.categoria_id === mostrarLibros ?
             <tr key={elem.id}>
               <td>{elem.id}</td>
               <td>{elem.nombre}</td>
