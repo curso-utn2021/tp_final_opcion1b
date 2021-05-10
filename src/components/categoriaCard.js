@@ -13,7 +13,7 @@ export default function CategoriaCard(props) {
       props.refrescame();
       sacarWarningDeVariableNoUsada(respuesta);
     } catch (error) {
-      alert(error.response.data.Error);
+      alert(error.response.data.mensaje);
     }
   };
 
