@@ -14,7 +14,6 @@ export default function ModalPrestarLibro(props) {
       var respuesta = await axios.get("http://localhost:3001/persona");
 
       setListaPersonas(respuesta.data);
-      console.log(listaPersonas);
     } catch (error) {
       alert(error.response.data.Error);
     }
@@ -55,7 +54,6 @@ export default function ModalPrestarLibro(props) {
       var respuesta = await axios.put("http://localhost:3001/libro/prestar/" + props.idLibro, {
         persona_id: idPersonaSeleccionado,
       });
-      console.log('El id del libro es: '+props.idLibro);
       sacarWarningDeVariableNoUsada(respuesta);
       props.ocultame();
       

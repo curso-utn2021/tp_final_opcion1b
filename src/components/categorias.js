@@ -54,8 +54,8 @@ export default function Categorias() {
         const respuesta = await axios.get("http://localhost:3001/libro");
         
         setListaLibros(respuesta.data);
-      } catch(e) {
-        console.log(e.message);
+      } catch(error) {
+        console.log(error.response.data.Error);
         console.log("No se encontraron libros para esta categoria.");
         setListaLibros([]);
       }
