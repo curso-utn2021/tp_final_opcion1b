@@ -8,8 +8,6 @@ export default function Libros(props) {
   const [mostrarModalAltaLibro, setMostrarModalAltaLibro] = React.useState(false);
 
   const cargaDatosDeServer = async () => {
-    console.log("ejecutando cargaDatosDeServer");
-
     try {
       var respuesta = await axios.get("http://localhost:3001/libro");
       setListado(respuesta.data);
