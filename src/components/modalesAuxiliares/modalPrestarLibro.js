@@ -7,7 +7,7 @@ export default function ModalPrestarLibro(props) {
   React.useEffect(() => cargaDatosDeServer(), []);
 
   const [listaPersonas, setListaPersonas] = React.useState([]);
-  const [idPersonaSeleccionado, setIdPersonaSeleccionado] = React.useState(1);
+  const [idPersonaSeleccionado, setIdPersonaSeleccionado] = React.useState(-1);
 
   const cargaDatosDeServer = async () => {
     try {
@@ -19,7 +19,11 @@ export default function ModalPrestarLibro(props) {
     }
   };
 
-  let opciones = [];
+  let opciones = [
+    <option key="-1" value="null">
+    No ha seleccionado persona prestataria
+    </option>,
+  ];
 
   //console.log(listaPersonas);
 
